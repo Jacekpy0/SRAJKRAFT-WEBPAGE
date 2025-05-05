@@ -89,7 +89,7 @@
     <div class="section">
       <h2>O grze</h2>
       <p><strong>Srajkraft</strong> to klasyczna gra 2D w wersji testowej alpha. Prosta – buduj i rozwalaj.</p>
-      <a href="javascript:download()" class="button">Pobierz alpha</a>
+      <a href="javascript:alert('Pobieraj')" class="button">Zagraj teraz</a>
       <a href="javascript:alert('Nie')" class="button">Zobacz kod źródłowy</a>
     </div>
 
@@ -104,45 +104,41 @@
     <div class="section">
       <h2>Pobierz</h2>
       <p>Link do repo i plików:</p>
-      <a href="Srajkraft.jar" class="button">Pobierz alpha</a>
-      <a href="Srajkraft.jar" class="button">Zainstaluj gre na zaistym komputerze</a>
+      <a href="#" class="button">Pobierz alpha</a>
+      <a href="#" class="button">GitHub / Repo</a>
+      <p>Liczenie pobrań: 
+        <?php
+          // Ustawienie pliku, który przechowuje liczbę pobrań
+          $file = "download_counter.txt";
+
+          // Jeśli plik nie istnieje, tworzymy go
+          if (!file_exists($file)) {
+              file_put_contents($file, "0");
+          }
+
+          // Odczytujemy aktualną liczbę pobrań
+          $downloads = (int)file_get_contents($file);
+
+          // Zwiększamy liczbę pobrań
+          $downloads++;
+
+          // Zapisujemy zaktualizowaną liczbę pobrań do pliku
+          file_put_contents($file, $downloads);
+
+          // Zwracamy liczbę pobrań
+          echo $downloads;
+        ?>
+      </p>
     </div>
 
     <div class="section">
       <h2>Kontakt</h2>
-      <p>Masz pytania? To się nie zesraj.</p>
-    </div>
-
-    <div class="section">
-      <h2>Liczba pobrań</h2>
-      <p id="download-count">Ładowanie...</p>
+      <p>Masz pytania? To sie nie zesraj.</p>
     </div>
   </div>
 
   <footer>
     &copy; 2025 Jakcek – Srajkraft Alpha. Wszelkie prawa zastrzeżone.
   </footer>
-
-  <script>
-    // Funkcja pobierania, która wywoła PHP do zaktualizowania licznika
-    function download() {
-      fetch('counter.php')
-        .then(response => response.text())
-        .then(count => {
-          document.getElementById('download-count').innerText = "Liczba pobrań: " + count;
-        })
-        .catch(err => console.error('Błąd:', err));
-    }
-
-    // Ładowanie początkowej liczby pobrań na stronie
-    window.onload = function() {
-      fetch('counter.php')
-        .then(response => response.text())
-        .then(count => {
-          document.getElementById('download-count').innerText = "Liczba pobrań: " + count;
-        })
-        .catch(err => console.error('Błąd:', err));
-    }
-  </script>
 </body>
 </html>
